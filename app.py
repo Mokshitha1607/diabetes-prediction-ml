@@ -17,8 +17,13 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-model = LogisticRegression(max_iter=1000)
-model.fit(X_train, y_train)
+@st.cache_resource
+def train_model():
+    model = LogisticRegression(max_iter=1000)
+    model.fit(X_train, y_train)
+    return model
+
+model = train_model()
 
 # User input
 st.header("Enter Patient Details")
@@ -49,4 +54,5 @@ if st.button("Predict"):
     if result[0] == 1:
         st.error("⚠ High Risk of Diabetes")
     else:
+
         st.success("✅ Low Risk of Diabetes")
