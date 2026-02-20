@@ -56,3 +56,4 @@ if st.button("Predict"):
     else:
 
         st.success("✅ Low Risk of Diabetes")
+
